@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "atob": "^2.1.2",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "file": "^0.2.2",
     "file-type": "^15.0.1"

@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const fileType = require('file-type'); // Correct import for file-type
@@ -6,9 +7,17 @@ const atob = require('atob');
 
 const app = express();
 
+
 // Increase payload size limit to 50MB
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+
+app.use(cors({
+    origin: '*',  // Add your frontend URL here
+    methods: ['GET', 'POST'],        // Add necessary HTTP methods
+  }));
+  
 
 // Function to check if a number is prime
 function is_prime(num) {
