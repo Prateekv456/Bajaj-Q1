@@ -102,7 +102,7 @@ async function processRequest(request) {
 app.post('/api/process', async (req, res) => {
     const input = req.body;
 
-    if (!input || !input.data || !input.file_b64) {
+    if (!input || !input.data) {
         return res.status(400).json({ error: "Invalid request data" });
     }
 
