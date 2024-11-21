@@ -12,6 +12,7 @@
   "dependencies": {
     "atob": "^2.1.2",
     "express": "^4.21.1",
-    "file-type": "^19.6.0"
+    "file": "^0.2.2",
+    "file-type": "^15.0.1"
   }
 }

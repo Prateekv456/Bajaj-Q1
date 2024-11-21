@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { fileTypeFromBuffer } = require('file-type'); // Correct import for file-type
+const fileType = require('file-type'); // Correct import for file-type
 const atob = require('atob');
 
 const app = express();
@@ -58,7 +58,7 @@ async function processRequest(request) {
         const file_data = Buffer.from(file_b64, 'base64');
         
         // Use the correct method from file-type to detect mime type
-        const result = await fileTypeFromBuffer(file_data); 
+        const result = await fileType.fromBuffer(file_data);  // Use fromBuffer() method
         file_mime_type = result ? result.mime : null;
         file_size_kb = Math.round(file_data.length / 1024);
 
