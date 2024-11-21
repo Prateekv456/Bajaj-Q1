@@ -27,7 +27,7 @@ async function processRequest(request) {
     const numbers = [];
     const alphabets = [];
     const lowercase_alphabets = [];
-    let highest_lowercase_alphabet = [];
+    let highest_lowercase_alphabet = null;
     let is_prime_found = false;
 
     // Process the data
@@ -45,8 +45,9 @@ async function processRequest(request) {
         }
     });
 
+    // Find the highest lowercase alphabet character
     if (lowercase_alphabets.length > 0) {
-        highest_lowercase_alphabet = [Math.max(...lowercase_alphabets.map(char => char.charCodeAt(0)))];
+        highest_lowercase_alphabet = lowercase_alphabets.sort((a, b) => b.charCodeAt(0) - a.charCodeAt(0))[0];
     }
 
     // Decode and validate the file
@@ -62,7 +63,11 @@ async function processRequest(request) {
         file_mime_type = result ? result.mime : null;
         file_size_kb = Math.round(file_data.length / 1024);
 
+        // Check if the file is a valid PDF (or other types if necessary)
         if (file_mime_type && file_mime_type === 'application/pdf') {
+            file_valid = true;
+        } else if (file_mime_type && file_mime_type.startsWith('image/')) {
+            // Allow image files (e.g., jpeg, png)
             file_valid = true;
         }
     }
@@ -82,6 +87,7 @@ async function processRequest(request) {
         "file_size_kb": file_size_kb ? file_size_kb.toString() : "0"
     };
 }
+
 
 // API endpoint to process the request
 app.post('/api/process', async (req, res) => {
