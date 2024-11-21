@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const fileType = require('file-type'); // Correct import for file-type
+const { fileTypeFromBuffer } = require('file-type'); // Correct import for file-type
 const atob = require('atob');
 
 const app = express();
